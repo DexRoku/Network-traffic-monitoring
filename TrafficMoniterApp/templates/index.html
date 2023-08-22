@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Internet Traffic Monitor</title>
+</head>
+<body>
+    <h1>Internet Traffic Monitor</h1>
+    <p>Total Bytes Sent: <span id="sent">0</span></p>
+    <p>Total Bytes Received: <span id="received">0</span></p>
+
+    <script>
+        // Function to update traffic data using AJAX
+        function updateTraffic() {
+            fetch('/traffic')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('sent').textContent = data.sent.toLocaleString();
+                    document.getElementById('received').textContent = data.received.toLocaleString();
+                });
+        }
+
+        // Update traffic data every 1 second
+        setInterval(updateTraffic, 1000);
+    </script>
+</body>
+</html>
+
